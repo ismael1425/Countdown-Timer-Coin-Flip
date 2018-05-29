@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flip Coin</title>
+</head>
+<style type="text/css">
+	div#result {
+    color: blue;
+    text-align: center;
+    font-size: 20px;
+	}
+	button.btn {
+	    background: black;
+	    color: white;
+	    border: none;
+	    border-radius: 4px;
+	    height: 30px;
+	    margin: 10px;
+	}
+	h1 {
+    color: lightseagreen;
+    font-size: 24px;
+}
+	label {
+    	font-size: 29px;
+    	display: inherit;
+    	
+	}
+	input[type="text"] {
+    
+    border-style: ridge;
+	}
+	.container {
+	    width: 80%;
+	    background: aliceblue;
+	    margin: auto;
+	    height: 150px;
+	    text-align: center;
+	}
+	
+</style>
+<body>
+	<h1>Type a number greater than or equal to 0, and less than 1000,000</h1>
+	<div class="container">
+		<form>
+			<div>
+				<label for="name">Number:</label>
+				<input type="text" name="num">
+			</div>
+			<button class="btn" onclick="randomNumber(num.value);">Random Number</button>
+		</form>
+	</div>
+	<div id="result">
+		
+	</div>
+	
+<script type="text/javascript">
+
+	function flip() {
+  		return Math.random() >= 0.5;
+	}
+
+	function randomNumber(n) {
+		event.preventDefault();
+		var result;
+		if((n === undefined)|| (n <= 0) || (n > 1000000)) {
+			 document.getElementById("result").innerHTML="<h2>Error</h2>";
+			throw new Error("Error");}
+
+		if(n === 1){ document.getElementById("result").innerHTML="<h2>"+0+"</h2>";return 0;}
+
+  		var maxValue = n-1;
+
+  		var B = maxValue.toString(2).length;
+  	
+
+		do {
+		    result = parseInt(randomBinary(B), 2);
+		  } while (result > maxValue);
+
+		  
+		  function randomBinary(m){
+		    binary = "";
+		    for (var i=0; i<m; i++) {
+		      binary+= flip()? "1" : "0";
+		    }
+		    return binary;
+		  }  
+		  console.log(result);
+		  document.getElementById("result").innerHTML="<h2>"+result+"</h2>";
+  return result;
+}
+</script>
+</body>
+</html>
